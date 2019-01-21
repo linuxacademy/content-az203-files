@@ -1,0 +1,15 @@
+AZ_BATCH_TASK_DIR=/mnt/batch/tasks/workitems/myjob/job-1/mytask1
+AZ_BATCH_NODE_STARTUP_DIR=/mnt/batch/tasks/startup
+AZ_BATCH_CERTIFICATES_DIR=/mnt/batch/tasks/workitems/myjob/job-1/mytask1/certs
+AZ_BATCH_ACCOUNT_URL=https://laaz203batchacct.southcentralus.batch.azure.com/
+AZ_BATCH_TASK_WORKING_DIR=/mnt/batch/tasks/workitems/myjob/job-1/mytask1/wd
+AZ_BATCH_NODE_SHARED_DIR=/mnt/batch/tasks/shared
+AZ_BATCH_TASK_USER=_azbatch
+AZ_BATCH_NODE_ROOT_DIR=/mnt/batch/tasks
+AZ_BATCH_JOB_ID=myjob
+AZ_BATCH_NODE_IS_DEDICATED=true
+AZ_BATCH_NODE_ID=tvm-2169193117_2-20190120t042213z
+AZ_BATCH_POOL_ID=mypool
+AZ_BATCH_TASK_ID=mytask1
+AZ_BATCH_ACCOUNT_NAME=laaz203batchacct
+AZ_BATCH_TASK_USER_IDENTITY=PoolNonAdmin

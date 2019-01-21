@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.2.0"/>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0-preview.18571.3"/>
+  </ItemGroup>
+</Project>

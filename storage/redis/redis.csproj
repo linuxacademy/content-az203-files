@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" Version="2.0.519"/>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0"/>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1"/>
+    <PackageReference Include="Microsoft.Azure.CosmosDB.Table" Version="*"/>
+    <PackageReference Include="Microsoft.Azure.Storage.Common" Version="8.6.0-preview"/>
+    <PackageReference Include="WindowsAzure.Storage" Version="9.3.3"/>
+  </ItemGroup>
+</Project>
