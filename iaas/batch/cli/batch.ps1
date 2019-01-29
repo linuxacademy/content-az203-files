@@ -1,6 +1,6 @@
 $rgName = "batch"
 $stgAcctName = "laaz203batchsa"
-$location = "southcentralus"
+$location = "westus"
 $batchAcctName = "laaz203batchacct"
 $poolName = "myPool"
 
@@ -26,7 +26,7 @@ az batch account login `
  --shared-key-auth
 
 az batch pool create `
- --id mypool `
+ --id $poolName `
  --vm-size Standard_A1_v2 `
  --target-dedicated-nodes 2 `
  --image `
@@ -40,7 +40,7 @@ az batch pool show `
 
 az batch job create `
  --id myjob `
- --pool-id mypool
+ --pool-id $poolName
 
 for ($i=0; $i -lt 4; $i++) {
     az batch task create `
@@ -60,9 +60,9 @@ az batch task file list `
 
 az batch task file download `
  --job-id myjob `
- --task-id mytask1 `
+ --task-id mytask0 `
  --file-path stdout.txt `
- --destination ./stdout.txt
+ --destination ./stdout0.txt
 
 az batch pool delete -n $poolName
 az group delete -n $rgName

@@ -1,5 +1,0 @@
-{
-    "PartitionKey": "Computer",
-    "RowKey": "Disk",
-    "Description": "NVMe SSD"
-}
