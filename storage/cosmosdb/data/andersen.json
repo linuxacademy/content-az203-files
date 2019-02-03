@@ -1,0 +1,17 @@
+{
+    "id": "AndersenFamily",
+    "lastName": "Andersen",
+    "parents": [
+       { "firstName": "Thomas" },
+       { "firstName": "Mary Kay"}
+    ],
+    "children": [
+       {
+           "firstName": "Henriette Thaulow",
+           "gender": "female",
+           "grade": 5,
+           "pets": [{ "givenName": "Fluffy" }]
+       }
+    ],
+    "address": { "state": "WA", "county": "King", "city": "seattle" }
+}

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Management.Websites" Version="2.0.1"/>
+    <PackageReference Include="Microsoft.Azure.Management.ResourceManager.Fluent" Version="1.19.0"/>
+    <PackageReference Include="Microsoft.Azure.Management.ResourceManager" Version="2.0.0-preview"/>
+    <PackageReference Include="Microsoft.Azure.Common" Version="2.2.1"/>
+    <PackageReference Include="Microsoft.Azure.Storage.Common" Version="9.4.2"/>
+    <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="9.4.2"/>
+  </ItemGroup>
+</Project>

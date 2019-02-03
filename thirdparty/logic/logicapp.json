@@ -1,0 +1,115 @@
+{
+    "$connections": {
+        "value": {
+            "azureblob": {
+                "connectionId": "/subscriptions/298c6f7d-4dac-465f-b7e4-65e216d1dbe9/resourceGroups/logicapps/providers/Microsoft.Web/connections/azureblob",
+                "connectionName": "azureblob",
+                "id": "/subscriptions/298c6f7d-4dac-465f-b7e4-65e216d1dbe9/providers/Microsoft.Web/locations/southcentralus/managedApis/azureblob"
+            },
+            "azurequeues": {
+                "connectionId": "/subscriptions/298c6f7d-4dac-465f-b7e4-65e216d1dbe9/resourceGroups/logicapps/providers/Microsoft.Web/connections/azurequeues",
+                "connectionName": "azurequeues",
+                "id": "/subscriptions/298c6f7d-4dac-465f-b7e4-65e216d1dbe9/providers/Microsoft.Web/locations/southcentralus/managedApis/azurequeues"
+            }
+        }
+    },
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "For_each": {
+                "actions": {
+                    "Condition": {
+                        "actions": {
+                            "Put_a_message_on_a_queue": {
+                                "inputs": {
+                                    "body": "@items('For_each')?['Path']",
+                                    "host": {
+                                        "connection": {
+                                            "name": "@parameters('$connections')['azurequeues']['connectionId']"
+                                        }
+                                    },
+                                    "method": "post",
+                                    "path": "/@{encodeURIComponent('toarchive')}/messages"
+                                },
+                                "runAfter": {},
+                                "type": "ApiConnection"
+                            }
+                        },
+                        "expression": {
+                            "and": [
+                                {
+                                    "less": [
+                                        "@ticks(items('for_each')?['LastModified'])",
+                                        "@ticks(addMinutes(UtcNow(), variables('TierAgeMinutes')))    "
+                                    ]
+                                }
+                            ]
+                        },
+                        "runAfter": {},
+                        "type": "If"
+                    }
+                },
+                "foreach": "@body('List_blobs')?['value']",
+                "runAfter": {
+                    "List_blobs": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Foreach"
+            },
+            "Initialize_variable": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "TierAgeMinutes",
+                            "type": "Integer",
+                            "value": 0
+                        }
+                    ]
+                },
+                "runAfter": {},
+                "type": "InitializeVariable"
+            },
+            "List_blobs": {
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['azureblob']['connectionId']"
+                        }
+                    },
+                    "method": "get",
+                    "path": "/datasets/default/foldersV2/@{encodeURIComponent(encodeURIComponent('JTJmaW1hZ2Vz'))}",
+                    "queries": {
+                        "useFlatListing": false
+                    }
+                },
+                "metadata": {
+                    "JTJmaW1hZ2Vz": "/images"
+                },
+                "runAfter": {
+                    "Initialize_variable": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "Recurrence": {
+                "recurrence": {
+                    "frequency": "Minute",
+                    "interval": 1
+                },
+                "type": "Recurrence"
+            }
+        }
+    }
+}
