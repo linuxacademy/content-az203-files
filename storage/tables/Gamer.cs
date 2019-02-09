@@ -14,7 +14,8 @@ namespace linuxacademy.az203.storage.tables
         public string Phone { get; set; }
 
         public Gamer() {}
-        public Gamer(string email, string region, string name, string phone = null)
+        public Gamer(string email, string region, 
+                     string name, string phone = null)
         {
             this.PartitionKey = region;
             this.RowKey = email;

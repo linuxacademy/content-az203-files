@@ -10,10 +10,11 @@ namespace linuxacademy.az203.storage.tables
 {
     public class Tables
     {
-        private static string _connectionString = "DefaultEndpointsProtocol=https;AccountName=laaz203tables;AccountKey=HTa3K4un5Zy3/z+uHsNFdiKr/BzTGIROSH6Am/lbNQU+esB4Lt7wXV+nfQLLY54v3FMp+DrWnoVXqPjlZLtcCw==;EndpointSuffix=core.windows.net";
+        private static string _connectionString = "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=laaz203tables;AccountKey=vsl0Zp7e9Do0Lhgg1etbiVcor0RabhfciBZKUblXJlvUw57Q6dW8pmV/z5vDmpPsMJ0iVPByYDXz8ljho8fGBw==";
 
         public static async Task runDemoAsync(){
-            var storageAccount = CloudStorageAccount.Parse(_connectionString);
+            var storageAccount = CloudStorageAccount
+                                    .Parse(_connectionString);
             var tableClient = storageAccount.CreateCloudTableClient();
 
             var gamersTable = tableClient.GetTableReference("Gamers");
@@ -30,40 +31,47 @@ namespace linuxacademy.az203.storage.tables
             };
             await AddBatchAsync(gamersTable, gamers);
 
-            var bleu = await GetAsync<Gamer>(gamersTable, "France", "bleu@game.net");
+            var bleu = await GetAsync<Gamer>(
+                gamersTable, "France", "bleu@game.net");
             System.Console.WriteLine(bleu);
 
             gamers = await FindGamersByNameAsync(gamersTable, "Mike");
             gamers.ForEach(Console.WriteLine);
         }
 
-        public static async Task AddAsync<T>(CloudTable table, T entity) where T : TableEntity
+        public static async Task AddAsync<T>(
+            CloudTable table, T entity) where T : TableEntity
         {
             var insertOperation = TableOperation.Insert(entity);
             await table.ExecuteAsync(insertOperation);
         }
 
-        public static async Task AddBatchAsync<T>(CloudTable table, IEnumerable<T> entities) where T : TableEntity
+        public static async Task AddBatchAsync<T>(
+            CloudTable table, IEnumerable<T> entities) where T : TableEntity
         {
             var batchOperation = new TableBatchOperation();
-            foreach (var entity in entities) batchOperation.Insert(entity);
+            foreach (var entity in entities) 
+            batchOperation.Insert(entity);
             await table.ExecuteBatchAsync(batchOperation);
         }
 
-        public static async Task<T> GetAsync<T>(CloudTable table, string pk, string rk) where T : TableEntity
+        public static async Task<T> GetAsync<T>(
+            CloudTable table, string pk, string rk) where T : TableEntity
         {
             var retrieve = TableOperation.Retrieve<Gamer>(pk, rk);
             var result = await table.ExecuteAsync(retrieve);
             return (T)result.Result;
         }
 
-        public static async Task DeleteAsync<T>(CloudTable table, T entity) where T : TableEntity
+        public static async Task DeleteAsync<T>(
+            CloudTable table, T entity) where T : TableEntity
         {
             var retrieve = TableOperation.Delete(entity);
             await table.ExecuteAsync(retrieve);
         }
 
-        public static async Task<List<Gamer>> FindGamersByNameAsync(CloudTable table, string name) 
+        public static async Task<List<Gamer>> FindGamersByNameAsync(
+            CloudTable table, string name) 
         {
             var filterCondition = TableQuery.GenerateFilterCondition("Name", QueryComparisons.Equal, name);
             var query = new TableQuery<Gamer>().Where(filterCondition);

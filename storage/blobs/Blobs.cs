@@ -8,7 +8,8 @@ namespace linuxacademy.az203.storage.blobs
 {
     public class Blobs
     {
-        public static string _connectionString = "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=laaz203blobs;AccountKey=gh5B7Ym3DJCzhTlriTovrkpUanUemh0OTiUY6LJi3m7YkdN//UY7i2sbLuH9piCWA2E8xCJhUO8INPWUtj/fkQ==";
+        public static string _connectionString = 
+            "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=laaz203blobs;AccountKey=3A1YdQ11kVDHJZy+V6lEw4ejKmPxLyUbKf86DCpffYV+/Ctt/vdLhG4/bKvs8vmgbJZHk4PORqB48H55BQpNlw==";
         public static async Task RunAsync()
         {
             var storageAccount = CloudStorageAccount
@@ -33,7 +34,7 @@ namespace linuxacademy.az203.storage.blobs
             await cloudBlockBlob.UploadFromFileAsync(localFileName);
 
             // List the blobs in the container.
-            Console.WriteLine("Listing blobs in cont=ainer.");
+            Console.WriteLine("Listing blobs in container.");
             BlobContinuationToken blobContinuationToken = null;
             do {
                 var results = await cloudBlobContainer

@@ -17,8 +17,10 @@ namespace linuxacademy.az203.storage.cosmosdb
         private static DocumentClient _client;
         private const string _databaseId = "myDatabase";
         private const string _collectionId = "Families";
-        private const string _endpoint = "https://laaz203cosmosdb.documents.azure.com:443/";
-        private const string _key = "wV5VIQmfpe5KVoYjad3IiowYU2zv9yVLkJfuAPyqV3TLn9igmjLyDCrc9X7hMcPjbdB92l6kasDvx0LFsoP03g==";
+        private const string _endpoint = 
+            "https://laaz203cosmosdb.documents.azure.com:443/";
+        private const string _key = 
+            "jmuuGPVCBz9VGSqeB2YKJxpvnNQEyirAhUQAChz4qv5rzQDMoBRl5fhyurRUT5wgsjGX7IMPfU0SZfZuF3zsDw==";
 
         static void Main(string[] args)
         {
@@ -40,7 +42,7 @@ namespace linuxacademy.az203.storage.cosmosdb
                         Paths = new Collection<string>(new [] { "/id" })
                     }
                 });
-/* 
+ 
             var family1 = JObject.Parse(File.ReadAllText("data/andersen.json"));
             var family2 = JObject.Parse(File.ReadAllText("data/wakefield.json"));
 
@@ -53,7 +55,7 @@ namespace linuxacademy.az203.storage.cosmosdb
                 _databaseId, _collectionId, "AndersenFamily");
             await GetDocumentByIdAsync(
                 _databaseId, _collectionId, "WakefieldFamily");
-*/
+
 //Select the AndersenFamily document
             ExecuteSqlQuery(_databaseId, _collectionId, 
             @"
@@ -122,7 +124,8 @@ SELECT c.givenName
             string documentId)
         {
             var response = await _client.ReadDocumentAsync(
-                UriFactory.CreateDocumentUri(databaseId, collectionId, documentId),
+                UriFactory.CreateDocumentUri(
+                    databaseId, collectionId, documentId),
                 new RequestOptions { 
                     PartitionKey = new PartitionKey(documentId) 
                 }
@@ -133,7 +136,8 @@ SELECT c.givenName
             return response.Resource.ToString();
         }
 
-        private static void ExecuteSqlQuery(string databaseId, string collectionId, string sql)
+        private static void ExecuteSqlQuery(
+            string databaseId, string collectionId, string sql)
         {
             System.Console.WriteLine("SQL: " + sql);
             // Set some common query options
