@@ -1,14 +1,12 @@
+using System;
+using System.Text;
+using Microsoft.Azure.Search;
+using Microsoft.Azure.Search.Models;
+using Microsoft.Spatial;
+using Newtonsoft.Json;
+
 namespace linuxacademy.az203.thirdparty.search
 {
-    using System;
-    using Microsoft.Azure.Search;
-    using Microsoft.Azure.Search.Models;
-    using Microsoft.Spatial;
-    using Newtonsoft.Json;
-
-    // The SerializePropertyNamesAsCamelCase attribute is defined in the Azure Search .NET SDK.
-    // It ensures that Pascal-case property names in the model class are mapped to camel-case
-    // field names in the index.
     [SerializePropertyNamesAsCamelCase]
     public partial class Hotel
     {
@@ -50,5 +48,73 @@ namespace linuxacademy.az203.thirdparty.search
 
         [IsFilterable, IsSortable]
         public GeographyPoint Location { get; set; }
+    
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+
+            if (!String.IsNullOrEmpty(HotelId))
+            {
+                builder.AppendFormat("ID: {0}\t", HotelId);
+            }
+
+            if (BaseRate.HasValue)
+            {
+                builder.AppendFormat("Base rate: {0}\t", BaseRate);
+            }
+
+            if (!String.IsNullOrEmpty(Description))
+            {
+                builder.AppendFormat("Description: {0}\t", Description);
+            }
+
+            if (!String.IsNullOrEmpty(DescriptionFr))
+            {
+                builder.AppendFormat("Description (French): {0}\t", DescriptionFr);
+            }
+
+            if (!String.IsNullOrEmpty(HotelName))
+            {
+                builder.AppendFormat("Name: {0}\t", HotelName);
+            }
+
+            if (!String.IsNullOrEmpty(Category))
+            {
+                builder.AppendFormat("Category: {0}\t", Category);
+            }
+
+            if (Tags != null && Tags.Length > 0)
+            {
+                builder.AppendFormat("Tags: [{0}]\t", String.Join(", ", Tags));
+            }
+
+            if (ParkingIncluded.HasValue)
+            {
+                builder.AppendFormat("Parking included: {0}\t", ParkingIncluded.Value ? "yes" : "no");
+            }
+
+            if (SmokingAllowed.HasValue)
+            {
+                builder.AppendFormat("Smoking allowed: {0}\t", SmokingAllowed.Value ? "yes" : "no");
+            }
+
+            if (LastRenovationDate.HasValue)
+            {
+                builder.AppendFormat("Last renovated on: {0}\t", LastRenovationDate);
+            }
+
+            if (Rating.HasValue)
+            {
+                builder.AppendFormat("Rating: {0}/5\t", Rating);
+            }
+
+            if (Location != null)
+            {
+                builder.AppendFormat("Location: Latitude {0}, longitude {1}\t", Location.Latitude, Location.Longitude);
+            }
+
+            return builder.ToString();
+        }
     }
 }
+    

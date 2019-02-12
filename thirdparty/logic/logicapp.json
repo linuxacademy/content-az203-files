@@ -4,12 +4,12 @@
             "azureblob": {
                 "connectionId": "/subscriptions/298c6f7d-4dac-465f-b7e4-65e216d1dbe9/resourceGroups/logicapps/providers/Microsoft.Web/connections/azureblob",
                 "connectionName": "azureblob",
-                "id": "/subscriptions/298c6f7d-4dac-465f-b7e4-65e216d1dbe9/providers/Microsoft.Web/locations/southcentralus/managedApis/azureblob"
+                "id": "/subscriptions/298c6f7d-4dac-465f-b7e4-65e216d1dbe9/providers/Microsoft.Web/locations/westus/managedApis/azureblob"
             },
             "azurequeues": {
                 "connectionId": "/subscriptions/298c6f7d-4dac-465f-b7e4-65e216d1dbe9/resourceGroups/logicapps/providers/Microsoft.Web/connections/azurequeues",
                 "connectionName": "azurequeues",
-                "id": "/subscriptions/298c6f7d-4dac-465f-b7e4-65e216d1dbe9/providers/Microsoft.Web/locations/southcentralus/managedApis/azurequeues"
+                "id": "/subscriptions/298c6f7d-4dac-465f-b7e4-65e216d1dbe9/providers/Microsoft.Web/locations/westus/managedApis/azurequeues"
             }
         }
     },
@@ -40,7 +40,7 @@
                                 {
                                     "less": [
                                         "@ticks(items('for_each')?['LastModified'])",
-                                        "@ticks(addMinutes(UtcNow(), variables('TierAgeMinutes')))    "
+                                        "@ticks(addMinutes(UtcNow(), variables('TierAgeMinutes')))"
                                     ]
                                 }
                             ]
@@ -63,7 +63,7 @@
                         {
                             "name": "TierAgeMinutes",
                             "type": "Integer",
-                            "value": 0
+                            "value": -1
                         }
                     ]
                 },
@@ -80,6 +80,7 @@
                     "method": "get",
                     "path": "/datasets/default/foldersV2/@{encodeURIComponent(encodeURIComponent('JTJmaW1hZ2Vz'))}",
                     "queries": {
+                        "nextPageMarker": "",
                         "useFlatListing": false
                     }
                 },
@@ -105,7 +106,7 @@
         "triggers": {
             "Recurrence": {
                 "recurrence": {
-                    "frequency": "Minute",
+                    "frequency": "Month",
                     "interval": 1
                 },
                 "type": "Recurrence"

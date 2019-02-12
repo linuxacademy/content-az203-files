@@ -18,9 +18,9 @@ namespace linuxacademy.az203.storage.cosmosdb
         private const string _databaseId = "myDatabase";
         private const string _collectionId = "Families";
         private const string _endpoint = 
-            "https://laaz203cosmosdb.documents.azure.com:443/";
+            "";
         private const string _key = 
-            "jmuuGPVCBz9VGSqeB2YKJxpvnNQEyirAhUQAChz4qv5rzQDMoBRl5fhyurRUT5wgsjGX7IMPfU0SZfZuF3zsDw==";
+            "";
 
         static void Main(string[] args)
         {

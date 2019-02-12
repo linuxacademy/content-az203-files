@@ -72,13 +72,12 @@ namespace linuxacademy.az203.storage.blobs
 
             await cloudBlockBlob.UploadFromFileAsync(localFileName);
 
-            /*
-            // or release it, but since we uploaded a new file, the lease is 
-            await cloudBlockBlob.ReleaseLeaseAsync(new AccessCondition()
+            // or release it
+            await cloudBlockBlob.ReleaseLeaseAsync(
+                new AccessCondition()
             {
                 LeaseId = leaseId
             });
-            */
 
             await cloudBlobContainer.DeleteIfExistsAsync();
         }
