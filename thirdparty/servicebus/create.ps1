@@ -17,4 +17,4 @@ New-AzureRmServiceBusQueue `
  -ResourceGroupName servicebus `
  -NamespaceName laaz203sb `
  -name testqueue `
- -EnablePatitioning $false
+ -EnablePartitioning $false
