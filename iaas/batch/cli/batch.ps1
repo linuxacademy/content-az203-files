@@ -64,5 +64,5 @@ az batch task file download `
  --file-path stdout.txt `
  --destination ./stdout0.txt
 
-az batch pool delete -n $poolName
+az batch pool delete --pool-id $poolName
 az group delete -n $rgName
